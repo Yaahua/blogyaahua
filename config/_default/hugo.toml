@@ -1,0 +1,69 @@
+baseURL = "https://yaahua.github.io/blogyaahua/"
+languageCode = "zh-tw"
+defaultContentLanguage = "zh-tw"
+title = "Yaahua 的博客"
+theme = "hugo-theme-stack"
+hasCJKLanguage = true
+paginate = 10
+
+[languages]
+  [languages.zh-tw]
+    languageName = "繁體中文"
+    weight = 1
+
+    [languages.zh-tw.params]
+      description = "反思、日記、學史雜記、創作"
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+[permalinks]
+  post = "/p/:slug/"
+  page = "/:slug/"
+
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "首頁"
+    url = "/"
+    weight = -100
+    [menu.main.params]
+      icon = "home"
+      newTab = false
+
+  [[menu.main]]
+    identifier = "about"
+    name = "關於我"
+    url = "/about/"
+    weight = -90
+    [menu.main.params]
+      icon = "user"
+      newTab = false
+
+  [[menu.main]]
+    identifier = "archives"
+    name = "歸檔"
+    url = "/archives/"
+    weight = -70
+    [menu.main.params]
+      icon = "archives"
+      newTab = false
+
+  [[menu.main]]
+    identifier = "search"
+    name = "搜尋"
+    url = "/search/"
+    weight = -60
+    [menu.main.params]
+      icon = "search"
+      newTab = false
+
+[markup]
+  [markup.highlight]
+    lineNos = true
+    noClasses = false
+
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
