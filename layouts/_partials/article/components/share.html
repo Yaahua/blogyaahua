@@ -5,17 +5,21 @@
             <span>分享連結</span>
         </button>
         
-        <a href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title }}" target="_blank" rel="noopener noreferrer" class="share-button twitter" title="分享到 Twitter">
-            {{ partial "helper/icon" "brand-twitter" }}
+        <a href="https://service.weibo.com/share/share.php?url={{ .Permalink }}&title={{ .Title }}" target="_blank" rel="noopener noreferrer" class="share-button qq" title="分享到 QQ">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+            </svg>
         </a>
 
-        <a href="http://service.weibo.com/share/share.php?url={{ .Permalink }}&title={{ .Title }}" target="_blank" rel="noopener noreferrer" class="share-button weibo" title="分享到微博">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-weibo" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M21 11.5c0 3.314 -4.03 6 -9 6s-9 -2.686 -9 -6s4.03 -6 9 -6s9 2.686 9 6z"></path>
-                <path d="M12 15c-1.657 0 -3 -1.119 -3 -2.5s1.343 -2.5 3 -2.5s3 1.119 3 2.5s-1.343 2.5 -3 2.5z"></path>
-                <path d="M15 6c1.333 .667 2 1.667 2 3"></path>
-                <path d="M18 5c1.333 1.333 2 3 2 5"></path>
+        <a href="https://web.wechat.com/" target="_blank" rel="noopener noreferrer" class="share-button wechat" title="分享到微信">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+            </svg>
+        </a>
+
+        <a href="https://www.xiaohongshu.com/" target="_blank" rel="noopener noreferrer" class="share-button xiaohongshu" title="分享到小紅書">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
             </svg>
         </a>
     </div>
@@ -80,12 +84,16 @@
         width: 18px;
         height: 18px;
     }
-    .share-button.twitter:hover {
-        background-color: #1da1f2;
-        border-color: #1da1f2;
+    .share-button.qq:hover {
+        background-color: #0066cc;
+        border-color: #0066cc;
     }
-    .share-button.weibo:hover {
-        background-color: #e6162d;
-        border-color: #e6162d;
+    .share-button.wechat:hover {
+        background-color: #09b83e;
+        border-color: #09b83e;
+    }
+    .share-button.xiaohongshu:hover {
+        background-color: #ff0000;
+        border-color: #ff0000;
     }
 </style>

@@ -22,3 +22,5 @@ slug: "about"
 ### 聯繫方式
 
 - GitHub: [yaahua](https://github.com/yaahua)
+- QQ: 3094414938
+- Email: yaahua@ice.edu.pl
