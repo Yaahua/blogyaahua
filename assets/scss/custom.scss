@@ -186,59 +186,164 @@ blockquote {
     border-radius: 16px 16px 0 0;
 }
 
-/* 
- * 文章目錄 (TOC) 懸浮樣式 - 全設備適配
+/*
+ * =====================================================
+ * 文章目錄 (TOC) 懸浮樣式
+ * 設計：
+ *   - 桌面端 (≥1024px)：article-toc 被主題隱藏，
+ *     TOC 由右側 widget--toc 呈現，右側欄整體 sticky。
+ *     此處額外美化 widget--toc 的滾動與高亮體驗。
+ *   - 手機端 (<1024px)：右側欄不顯示，
+ *     article-toc 強制顯示為文章頂部可折疊懸浮條。
+ * =====================================================
  */
-.article-page {
-    /* 桌面端：側邊懸浮 */
-    .article-toc {
-        position: sticky !important;
-        top: 2rem !important;
-        max-height: calc(100vh - 4rem) !important;
-        overflow-y: auto !important;
-        z-index: 100 !important;
-        background: var(--card-background);
-        padding: 1rem;
-        border-radius: var(--card-border-radius);
-        box-shadow: var(--shadow-l1);
 
-        /* 強制展開 */
-        details {
-            display: block !important;
-            summary {
-                cursor: default !important;
-                pointer-events: none !important;
-                list-style: none !important;
-                &::-webkit-details-marker { display: none !important; }
-                .icon-chevron-right { display: none !important; }
+/* ── 修復 H3-only 文章 TOC 空嵌套：隱藏無文字的空 li ── */
+.toc-nav ul li:not(:has(> a)):not(:has(> ul > li > a)) {
+    display: none;
+}
+/* 當第一層 li 只有子 ul 時，提升子 ul 到頂層顯示 */
+.toc-nav > ul > li > a:empty,
+.toc-nav > ul > li:not(:has(> a)) > ul {
+    padding-left: 0;
+}
+
+/* ── 桌面端：美化右側欄 TOC widget ── */
+@media (min-width: 1024px) {
+    .widget--toc {
+        /* 右側欄已是 sticky，此處讓 TOC 內容區可獨立滾動 */
+        .toc-nav {
+            max-height: calc(100vh - 12rem);
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-right: 4px;
+
+            /* 滾動條細化 */
+            &::-webkit-scrollbar {
+                width: 3px;
             }
-            .toc-nav {
-                display: block !important;
+            &::-webkit-scrollbar-thumb {
+                background: var(--card-text-color-tertiary);
+                border-radius: 2px;
             }
+        }
+
+        /* TOC 連結樣式 */
+        ul {
+            padding-left: 1rem;
+            list-style: none;
+        }
+
+        li a {
+            display: block;
+            padding: 3px 0;
+            font-size: 1.3rem;
+            color: var(--card-text-color-secondary);
+            text-decoration: none;
+            border-left: 2px solid transparent;
+            padding-left: 8px;
+            transition: color 0.2s, border-color 0.2s;
+            line-height: 1.5;
+
+            &:hover {
+                color: var(--accent-color);
+            }
+        }
+
+        /* scrollspy 高亮當前章節 */
+        li.active-class > a {
+            color: var(--accent-color);
+            border-left-color: var(--accent-color);
+            font-weight: 600;
         }
     }
 }
 
-/* 手機端：轉換為頂部固定或懸浮樣式 */
-@media (max-width: 1024px) {
-    .article-page {
-        .article-toc {
-            position: sticky !important;
-            top: 0 !important;
-            left: 0 !important;
-            right: 0 !important;
-            width: 100% !important;
-            max-height: 30vh !important;
-            margin: 0 0 2rem 0 !important;
-            border-radius: 0 0 var(--card-border-radius) var(--card-border-radius) !important;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
-            
-            /* 手機端恢復摺疊功能以節省空間 */
-            details {
-                summary {
-                    pointer-events: auto !important;
-                    cursor: pointer !important;
-                    .icon-chevron-right { display: inline-block !important; }
+/* ── 手機端：article-toc 強制顯示為折疊懸浮條 ── */
+@media (max-width: 1023px) {
+    /* 覆蓋主題的 display:none，讓 article-toc 在手機端可見 */
+    .article-toc {
+        display: block !important;
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 200 !important;
+        margin: 0 0 1.5rem 0 !important;
+        padding: 0 !important;
+        background: var(--card-background) !important;
+        border-radius: 0 0 12px 12px !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+        overflow: hidden !important;
+
+        details {
+            /* 預設折疊，用戶點擊展開 */
+            summary {
+                display: flex !important;
+                align-items: center !important;
+                padding: 10px 16px !important;
+                cursor: pointer !important;
+                pointer-events: auto !important;
+                list-style: none !important;
+                user-select: none;
+
+                &::-webkit-details-marker {
+                    display: none !important;
+                }
+
+                .article-toc-title {
+                    display: flex !important;
+                    align-items: center;
+                    gap: 6px;
+                    font-size: 1.3rem;
+                    font-weight: 600;
+                    color: var(--card-text-color-secondary);
+                    text-transform: uppercase;
+                    letter-spacing: 0.05em;
+
+                    .icon-chevron-right {
+                        display: inline-block !important;
+                        transition: transform 0.25s ease;
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+            }
+
+            /* 展開時箭頭旋轉 */
+            &[open] summary .article-toc-title .icon-chevron-right {
+                transform: rotate(90deg);
+            }
+
+            /* 展開後的目錄內容區 */
+            .toc-nav {
+                display: block !important;
+                max-height: 40vh;
+                overflow-y: auto;
+                padding: 8px 16px 12px;
+                border-top: 1px solid rgba(0, 0, 0, 0.06);
+
+                ul {
+                    padding-left: 1rem;
+                    list-style: none;
+                    margin: 0;
+                }
+
+                li a {
+                    display: block;
+                    padding: 4px 0;
+                    font-size: 1.3rem;
+                    color: var(--card-text-color-secondary);
+                    text-decoration: none;
+                    line-height: 1.5;
+
+                    &:hover {
+                        color: var(--accent-color);
+                    }
+                }
+
+                /* 當前章節高亮 */
+                li.active-class > a {
+                    color: var(--accent-color);
+                    font-weight: 600;
                 }
             }
         }

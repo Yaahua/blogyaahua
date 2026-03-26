@@ -1,17 +1,17 @@
 baseURL = "https://yaahua.github.io/blogyaahua/"
-languageCode = "zh-tw"
-defaultContentLanguage = "zh-tw"
+languageCode = "zh-hant-tw"
+defaultContentLanguage = "zh-hant-tw"
 title = "Yaahua 的博客"
 theme = "hugo-theme-stack"
 hasCJKLanguage = true
 paginate = 10
 
 [languages]
-  [languages.zh-tw]
+  [languages.zh-hant-tw]
     languageName = "繁體中文"
     weight = 1
 
-    [languages.zh-tw.params]
+    [languages.zh-hant-tw.params]
       description = "反思、日記、學史雜記、創作"
 
 [taxonomies]
@@ -60,6 +60,11 @@ paginate = 10
       newTab = false
 
 [markup]
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel   = 4
+    ordered    = false
+
   [markup.highlight]
     lineNos = true
     noClasses = false
