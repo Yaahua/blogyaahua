@@ -1,0 +1,91 @@
+<section class="article-share">
+    <div class="share-container">
+        <button id="copy-link-button" class="share-button" title="複製連結" data-url="{{ .Permalink }}">
+            {{ partial "helper/icon" "link" }}
+            <span>分享連結</span>
+        </button>
+        
+        <a href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title }}" target="_blank" rel="noopener noreferrer" class="share-button twitter" title="分享到 Twitter">
+            {{ partial "helper/icon" "brand-twitter" }}
+        </a>
+
+        <a href="http://service.weibo.com/share/share.php?url={{ .Permalink }}&title={{ .Title }}" target="_blank" rel="noopener noreferrer" class="share-button weibo" title="分享到微博">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-weibo" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M21 11.5c0 3.314 -4.03 6 -9 6s-9 -2.686 -9 -6s4.03 -6 9 -6s9 2.686 9 6z"></path>
+                <path d="M12 15c-1.657 0 -3 -1.119 -3 -2.5s1.343 -2.5 3 -2.5s3 1.119 3 2.5s-1.343 2.5 -3 2.5z"></path>
+                <path d="M15 6c1.333 .667 2 1.667 2 3"></path>
+                <path d="M18 5c1.333 1.333 2 3 2 5"></path>
+            </svg>
+        </a>
+    </div>
+</section>
+
+<script>
+    document.getElementById('copy-link-button').addEventListener('click', function() {
+        const url = this.getAttribute('data-url');
+        navigator.clipboard.writeText(url).then(() => {
+            const span = this.querySelector('span');
+            const originalText = span.textContent;
+            span.textContent = '已複製！';
+            this.classList.add('copied');
+            setTimeout(() => {
+                span.textContent = originalText;
+                this.classList.remove('copied');
+            }, 2000);
+        }).catch(err => {
+            console.error('無法複製連結: ', err);
+        });
+    });
+</script>
+
+<style>
+    .article-share {
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid var(--card-text-color-tertiary);
+        opacity: 0.8;
+    }
+    .share-container {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    .share-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        background-color: var(--card-background);
+        border: 1px solid var(--card-text-color-tertiary);
+        border-radius: var(--tag-border-radius);
+        color: var(--card-text-color-main);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 14px;
+        text-decoration: none;
+    }
+    .share-button:hover {
+        background-color: var(--accent-color);
+        color: var(--accent-color-text);
+        border-color: var(--accent-color);
+        transform: translateY(-2px);
+    }
+    .share-button.copied {
+        background-color: #2ecc71;
+        color: white;
+        border-color: #2ecc71;
+    }
+    .share-button svg {
+        width: 18px;
+        height: 18px;
+    }
+    .share-button.twitter:hover {
+        background-color: #1da1f2;
+        border-color: #1da1f2;
+    }
+    .share-button.weibo:hover {
+        background-color: #e6162d;
+        border-color: #e6162d;
+    }
+</style>
