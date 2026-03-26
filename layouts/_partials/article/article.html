@@ -1,0 +1,28 @@
+{{/*
+  覆蓋主題的 article.html
+  核心修改：將 article-toc 從 main-article（有 overflow:hidden）內部移出，
+  放在 main-article 之前，使 position:sticky 能夠正常工作。
+*/}}
+{{ if .Scratch.Get "TOCEnabled" }}
+<aside class="article-toc">
+    <details>
+        <summary>
+            <div class="article-toc-title">
+                {{ partial "helper/icon" "chevron-right" }}
+                <span>{{ T "article.tableOfContents" }}</span>
+            </div>
+        </summary>
+        <nav class="toc-nav">
+            {{ partial "article/components/toc" . | safeHTML }}
+        </nav>
+    </details>
+</aside>
+{{ end }}
+<article class="{{ if .Params.image }}has-image {{ end }}main-article">
+    {{ partial "article/components/header" (dict "Page" . "IsList" false) }}
+    {{ partial "article/components/content" . }}
+    {{ partial "article/components/footer" . }}
+    {{ if or .Params.math .Site.Params.article.math }}
+        {{ partialCached "article/components/math.html" . }}
+    {{ end }}
+</article>

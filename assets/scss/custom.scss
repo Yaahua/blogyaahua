@@ -189,12 +189,11 @@ blockquote {
 /*
  * =====================================================
  * 文章目錄 (TOC) 懸浮樣式
- * 設計：
- *   - 桌面端 (≥1024px)：article-toc 被主題隱藏，
- *     TOC 由右側 widget--toc 呈現，右側欄整體 sticky。
- *     此處額外美化 widget--toc 的滾動與高亮體驗。
- *   - 手機端 (<1024px)：右側欄不顯示，
- *     article-toc 強制顯示為文章頂部可折疊懸浮條。
+ * 架構說明：
+ *   article-toc 已移至 main-article（overflow:hidden）外部，
+ *   position:sticky 可正常工作。
+ *   - 桌面端 (≥1024px)：article-toc 隱藏，TOC 由右側 widget--toc 呈現。
+ *   - 手機端 (<1024px)：article-toc 顯示為頁面頂部吸頂折疊條。
  * =====================================================
  */
 
@@ -202,23 +201,25 @@ blockquote {
 .toc-nav ul li:not(:has(> a)):not(:has(> ul > li > a)) {
     display: none;
 }
-/* 當第一層 li 只有子 ul 時，提升子 ul 到頂層顯示 */
-.toc-nav > ul > li > a:empty,
 .toc-nav > ul > li:not(:has(> a)) > ul {
     padding-left: 0;
 }
 
-/* ── 桌面端：美化右側欄 TOC widget ── */
+/* ── 桌面端：article-toc 隱藏，使用右側欄 widget--toc ── */
 @media (min-width: 1024px) {
+    /* article-toc 在桌面端隱藏（主題已有此規則，此處確保一致） */
+    .article-toc {
+        display: none;
+    }
+
+    /* 美化右側欄 widget--toc */
     .widget--toc {
-        /* 右側欄已是 sticky，此處讓 TOC 內容區可獨立滾動 */
         .toc-nav {
             max-height: calc(100vh - 12rem);
             overflow-y: auto;
             overflow-x: hidden;
             padding-right: 4px;
 
-            /* 滾動條細化 */
             &::-webkit-scrollbar {
                 width: 3px;
             }
@@ -228,7 +229,6 @@ blockquote {
             }
         }
 
-        /* TOC 連結樣式 */
         ul {
             padding-left: 1rem;
             list-style: none;
@@ -250,7 +250,6 @@ blockquote {
             }
         }
 
-        /* scrollspy 高亮當前章節 */
         li.active-class > a {
             color: var(--accent-color);
             border-left-color: var(--accent-color);
@@ -259,9 +258,14 @@ blockquote {
     }
 }
 
-/* ── 手機端：article-toc 強制顯示為折疊懸浮條 ── */
+/* ── 手機端：article-toc 吸頂折疊條 ── */
 @media (max-width: 1023px) {
-    /* 覆蓋主題的 display:none，讓 article-toc 在手機端可見 */
+    /*
+     * article-toc 已移出 main-article（overflow:hidden）之外，
+     * sticky 可正常工作。
+     * 主題在 >=1024px 才 display:none，手機端本來就不隱藏，
+     * 但主題 SCSS 中沒有明確設置 display，此處強制確保顯示。
+     */
     .article-toc {
         display: block !important;
         position: sticky !important;
@@ -275,7 +279,6 @@ blockquote {
         overflow: hidden !important;
 
         details {
-            /* 預設折疊，用戶點擊展開 */
             summary {
                 display: flex !important;
                 align-items: center !important;
@@ -308,12 +311,10 @@ blockquote {
                 }
             }
 
-            /* 展開時箭頭旋轉 */
             &[open] summary .article-toc-title .icon-chevron-right {
                 transform: rotate(90deg);
             }
 
-            /* 展開後的目錄內容區 */
             .toc-nav {
                 display: block !important;
                 max-height: 40vh;
@@ -340,7 +341,6 @@ blockquote {
                     }
                 }
 
-                /* 當前章節高亮 */
                 li.active-class > a {
                     color: var(--accent-color);
                     font-weight: 600;
