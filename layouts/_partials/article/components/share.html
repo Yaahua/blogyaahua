@@ -18,26 +18,13 @@
             </svg>
             <span>系統分享</span>
         </button>
-        
-        <!-- QQ 分享 (使用標準圖標) -->
-        <a href="https://connect.qq.com/widget/sharebox/index.html?url={{ .Permalink }}&title={{ .Title }}" target="_blank" rel="noopener noreferrer" class="share-button qq" title="分享到 QQ">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon" fill="currentColor">
-                <path d="M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 37.166-83.123 34.051-163.415-10.469-208.535C342.401 122.198 287.76 96 224 96c-63.76 0-118.401 26.198-154.425 63.169-44.52 45.12-47.635 125.412-10.469 208.535 0 0-33.334 54.134-44.86 52.741-20.949-2.533-48.081-97.044-48.081-97.044C19.166 306.467 42.458 272.286 45.134 252.73c0 0 4.659-32.554 13.977-65.108C76.408 127.451 128.807 32 224 32c95.193 0 147.592 95.451 164.889 155.622 9.318 32.554 13.977 65.108 13.977 65.108 2.676 19.557 25.968 53.737 38.968 70.671 0 0-27.132 94.511-48.08 97.044zm-226.081-81.825c0-5.906-12.1-10.693-27.031-10.693-14.928 0-27.031 4.787-27.031 10.693 0 5.908 12.103 10.695 27.031 10.695 14.931 0 27.031-4.787 27.031-10.695zm102.721 0c0-5.906-12.103-10.693-27.031-10.693-14.931 0-27.031 4.787-27.031 10.693 0 5.908 12.103 10.695 27.031 10.695 14.928 0 27.031-4.787 27.031-10.695z"/>
-            </svg>
-        </a>
 
-        <!-- 微信分享 (使用標準圖標) -->
+        <!-- 微信分享 -->
         <a href="javascript:void(0);" id="wechat-share-button" class="share-button wechat" title="分享到微信">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="icon" fill="currentColor">
                 <path d="M385.2 167.6c6.4 0 12.6 .3 18.8 1.1C387.4 90.3 303.3 32 207.7 32 100.5 32 13.8 103.6 13.8 192.8c0 52.2 30.1 98.1 76.9 128.9l-19.3 58.5 68-34.1c18.1 5.1 37.5 7.9 57.7 7.9 6.4 0 12.6-.3 18.8-1.1-7.6-21.6-11.8-44.8-11.8-68.9 0-68.1 55.2-123.3 123.3-123.3zm-143.9-46.3c13.2 0 23.9 10.7 23.9 23.9s-10.7 23.9-23.9 23.9-23.9-10.7-23.9-23.9 10.7-23.9 23.9-23.9zm-123.2 0c13.2 0 23.9 10.7 23.9 23.9s-10.7 23.9-23.9 23.9-23.9-10.7-23.9-23.9 10.7-23.9 23.9-23.9zm443.3 154.3c0-74.3-72.2-134.5-161.3-134.5s-161.3 60.2-161.3 134.5c0 74.3 72.2 134.5 161.3 134.5 17 0 33.3-2.3 48.6-6.6l47 23.6-13.4-40.4c40.3-25.9 64.1-64.4 64.1-105.6zm-201.1-33.6c11 0 19.9 8.9 19.9 19.9s-8.9 19.9-19.9 19.9-19.9-8.9-19.9-19.9 8.9-19.9 19.9-19.9zm100.7 0c11 0 19.9 8.9 19.9 19.9s-8.9 19.9-19.9 19.9-19.9-8.9-19.9-19.9 8.9-19.9 19.9-19.9z"/>
             </svg>
-        </a>
-
-        <!-- 小紅書分享 (自定義圖標) -->
-        <a href="https://www.xiaohongshu.com/" target="_blank" rel="noopener noreferrer" class="share-button xiaohongshu" title="分享到小紅書">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon" fill="currentColor">
-                <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm4.172 17.5l-2.172-2.172-2.172 2.172-1.414-1.414 2.172-2.172-2.172-2.172 1.414-1.414 2.172 2.172 2.172-2.172 1.414 1.414-2.172 2.172 2.172 2.172-1.414 1.414z"/>
-            </svg>
+            <span>微信分享</span>
         </a>
     </div>
 </section>
@@ -80,7 +67,8 @@
     });
 
     // 微信分享邏輯 (網頁端提示，手機端盡量調用原生分享)
-    document.getElementById('wechat-share-button').addEventListener('click', function() {
+    document.getElementById('wechat-share-button').addEventListener('click', function(e) {
+        e.preventDefault();
         if (navigator.share) {
             navigator.share(shareData);
         } else {
@@ -131,19 +119,9 @@
         width: 18px;
         height: 18px;
     }
-    .share-button.qq:hover {
-        background-color: #12b7f5;
-        border-color: #12b7f5;
-        color: white;
-    }
     .share-button.wechat:hover {
         background-color: #07c160;
         border-color: #07c160;
-        color: white;
-    }
-    .share-button.xiaohongshu:hover {
-        background-color: #ff2442;
-        border-color: #ff2442;
         color: white;
     }
     .share-button.native-share {
