@@ -187,55 +187,59 @@ blockquote {
 }
 
 /* 
- * 文章目錄 (TOC) 懸浮樣式
- * 讓目錄在閱讀時始終保持在側邊懸浮
+ * 文章目錄 (TOC) 懸浮樣式 - 全設備適配
  */
 .article-page {
+    /* 桌面端：側邊懸浮 */
     .article-toc {
-        position: sticky;
-        top: var(--card-padding);
-        max-height: calc(100vh - 2 * var(--card-padding));
-        overflow-y: auto;
-        z-index: 100;
+        position: sticky !important;
+        top: 2rem !important;
+        max-height: calc(100vh - 4rem) !important;
+        overflow-y: auto !important;
+        z-index: 100 !important;
+        background: var(--card-background);
+        padding: 1rem;
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
 
-        /* 移除默認的 details 折疊樣式，使其始終展開（可選） */
+        /* 強制展開 */
         details {
-            &[open] summary {
-                margin-bottom: 15px;
-            }
+            display: block !important;
             summary {
-                cursor: default;
-                pointer-events: none; /* 禁用點擊摺疊 */
-                list-style: none;
-                &::-webkit-details-marker {
-                    display: none;
-                }
-                .icon-chevron-right {
-                    display: none; /* 隱藏箭頭 */
-                }
+                cursor: default !important;
+                pointer-events: none !important;
+                list-style: none !important;
+                &::-webkit-details-marker { display: none !important; }
+                .icon-chevron-right { display: none !important; }
             }
-        }
-        
-        /* 確保內容始終顯示 */
-        details:not([open]) {
-            display: block;
-            summary + .toc-nav {
-                display: block;
+            .toc-nav {
+                display: block !important;
             }
         }
     }
 }
 
-/* 針對移動端的適應性調整：如果屏幕太小，則不懸浮以避免遮擋內容 */
+/* 手機端：轉換為頂部固定或懸浮樣式 */
 @media (max-width: 1024px) {
-    .article-page .article-toc {
-        position: static;
-        max-height: none;
-        
-        details summary {
-            pointer-events: auto; /* 移動端恢復點擊功能 */
-            .icon-chevron-right {
-                display: inline-block;
+    .article-page {
+        .article-toc {
+            position: sticky !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            width: 100% !important;
+            max-height: 30vh !important;
+            margin: 0 0 2rem 0 !important;
+            border-radius: 0 0 var(--card-border-radius) var(--card-border-radius) !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+            
+            /* 手機端恢復摺疊功能以節省空間 */
+            details {
+                summary {
+                    pointer-events: auto !important;
+                    cursor: pointer !important;
+                    .icon-chevron-right { display: inline-block !important; }
+                }
             }
         }
     }
