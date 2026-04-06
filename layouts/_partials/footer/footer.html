@@ -9,7 +9,7 @@
     
     <section class="powerby">
         <div class="footer-motto">
-            <span class="motto-zh">記錄 · 反思 · 學習</span><br />
+            <span class="motto-zh">記錄 · 反思 · 學習</span>
             <span class="motto-en">Record · Reflection · Learning</span>
         </div>
     </section>
@@ -20,21 +20,29 @@
 @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap');
 
 .site-footer .powerby {
-    line-height: 1.8;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 居中對齊，若需靠左可改為 flex-start */
+}
+
+.footer-motto {
+    text-align: center; /* 確保兩行文字水平居中對齊 */
 }
 
 .footer-motto .motto-zh {
-    font-size: 0.9em;
-    font-family: inherit;
-    font-weight: normal;
+    font-size: 1.2em; /* 增大字號 */
+    font-family: "Kaiti", "STKaiti", "楷体", "楷体_GB2312", serif; /* 優先使用楷體 */
+    font-weight: bold;
     display: block;
+    margin-bottom: 2px;
 }
 
 .footer-motto .motto-en {
-    font-size: 1.2em; /* 哥特體通常偏小，適當放大 */
+    font-size: 1.3em; /* 哥特體適當放大以匹配中文視覺大小 */
     font-family: 'UnifrakturMaguntia', serif;
-    font-style: italic; /* 用戶要求的斜體 */
+    font-style: italic; /* 斜體 */
     display: block;
-    margin-top: 4px;
+    margin-top: 2px;
 }
 </style>
