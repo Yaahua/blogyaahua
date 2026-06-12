@@ -4,7 +4,7 @@
 [![Hugo](https://img.shields.io/badge/Hugo-v0.120%2B-ff4088)](https://gohugo.io/)
 [![Theme](https://img.shields.io/badge/Theme-Stack-blue)](https://github.com/CaiJimmy/hugo-theme-stack)
 
-基于 [Hugo](https://gohugo.io/) 与 [Stack](https://github.com/CaiJimmy/hugo-theme-stack) 主题构建的個人博客，部署於 GitHub Pages。
+基于 [Hugo](https://gohugo.io/) 与 [Stack](https://github.com/CaiJimmy/hugo-theme-stack) 主题构建的个人博客，部署于 GitHub Pages。
 
 **在线访问**: https://yaahua.github.io/blogyaahua/
 
@@ -15,7 +15,7 @@
 - **静态生成器**: Hugo (Extended 版本)
 - **主题**: Stack (深度定制：宋体、圆角设计、极简风格)
 - **部署**: GitHub Actions → GitHub Pages
-- **语言**: 繁体中文 (zh-tw)
+- **语言**: 简体中文 (zh-Hans)
 
 ## 目录结构
 
@@ -27,9 +27,9 @@
     │   ├── page/             # 独立页面（关于我等）
     │   └── post/             # 文章目录
     │       ├── 反思/         # 反思类文章
-    │       ├── 日記/         # 日记类文章
-    │       ├── 學史雜記/     # 学术笔记
-    │       └── 創作/         # 创作类文章
+    │       ├── 日记/         # 日记类文章
+    │       ├── 学史杂记/     # 学术笔记
+    │       └── 创作/         # 创作类文章
     ├── static/               # 静态资源（图片等）
     ├── hugo.toml             # Hugo 配置文件
     └── README.md             # 本文件
