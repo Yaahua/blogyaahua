@@ -1,5 +1,5 @@
 ---
-title: "搜尋"
+title: "搜寻"
 date: 2026-03-24
 layout: "search"
 slug: "search"
