@@ -1,8 +1,8 @@
 ---
-title: "首頁"
-description: "Yaahua 的個人博客"
+title: "首页"
+description: "Yaahua 的个人博客"
 ---
 
-歡迎來到我的博客。
+欢迎来到我的博客。
 
-這裡是首頁內容...
+这里是首页内容...
