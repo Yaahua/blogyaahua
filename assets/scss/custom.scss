@@ -185,3 +185,58 @@ blockquote {
 .site-footer {
     border-radius: 16px 16px 0 0;
 }
+
+/* 
+ * 文章目錄 (TOC) 懸浮樣式
+ * 讓目錄在閱讀時始終保持在側邊懸浮
+ */
+.article-page {
+    .article-toc {
+        position: sticky;
+        top: var(--card-padding);
+        max-height: calc(100vh - 2 * var(--card-padding));
+        overflow-y: auto;
+        z-index: 100;
+
+        /* 移除默認的 details 折疊樣式，使其始終展開（可選） */
+        details {
+            &[open] summary {
+                margin-bottom: 15px;
+            }
+            summary {
+                cursor: default;
+                pointer-events: none; /* 禁用點擊摺疊 */
+                list-style: none;
+                &::-webkit-details-marker {
+                    display: none;
+                }
+                .icon-chevron-right {
+                    display: none; /* 隱藏箭頭 */
+                }
+            }
+        }
+        
+        /* 確保內容始終顯示 */
+        details:not([open]) {
+            display: block;
+            summary + .toc-nav {
+                display: block;
+            }
+        }
+    }
+}
+
+/* 針對移動端的適應性調整：如果屏幕太小，則不懸浮以避免遮擋內容 */
+@media (max-width: 1024px) {
+    .article-page .article-toc {
+        position: static;
+        max-height: none;
+        
+        details summary {
+            pointer-events: auto; /* 移動端恢復點擊功能 */
+            .icon-chevron-right {
+                display: inline-block;
+            }
+        }
+    }
+}
