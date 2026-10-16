@@ -19,29 +19,43 @@
 /* 引入哥特體字體 (UnifrakturMaguntia) */
 @import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap');
 
-.site-footer .powerby {
-    line-height: 1.6;
+.site-footer {
     display: flex;
     flex-direction: column;
-    align-items: center; /* 居中對齊，若需靠左可改為 flex-start */
+    align-items: center;
+    text-align: center;
+}
+
+/* 版權信息行：字號最大 */
+.site-footer .copyright {
+    font-size: 1.5em; /* 設置為比下方格言更大的字號 */
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--card-text-color-main); /* 保持主題文本顏色 */
+}
+
+.site-footer .powerby {
+    line-height: 1.6;
 }
 
 .footer-motto {
-    text-align: center; /* 確保兩行文字水平居中對齊 */
+    text-align: center;
 }
 
+/* 繁體中文格言：楷體，字號次之 */
 .footer-motto .motto-zh {
-    font-size: 1.2em; /* 增大字號 */
-    font-family: "Kaiti", "STKaiti", "楷体", "楷体_GB2312", serif; /* 優先使用楷體 */
-    font-weight: bold;
+    font-size: 1.2em; 
+    font-family: "Kaiti", "STKaiti", "楷体", "楷体_GB2312", serif;
+    font-weight: normal;
     display: block;
     margin-bottom: 2px;
 }
 
+/* 英文格言：哥特體斜體，字號與中文相仿或略小 */
 .footer-motto .motto-en {
-    font-size: 1.3em; /* 哥特體適當放大以匹配中文視覺大小 */
+    font-size: 1.2em; 
     font-family: 'UnifrakturMaguntia', serif;
-    font-style: italic; /* 斜體 */
+    font-style: italic;
     display: block;
     margin-top: 2px;
 }
