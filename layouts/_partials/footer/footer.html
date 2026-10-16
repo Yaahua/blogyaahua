@@ -1,0 +1,40 @@
+<footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        {{ if and (.Site.Params.footer.since) (ne .Site.Params.footer.since (int (now.Format "2006"))) }}
+            {{ .Site.Params.footer.since }} - 
+        {{ end }}
+        {{ now.Format "2006" }} {{ default .Site.Title .Site.Copyright }}
+    </section>
+    
+    <section class="powerby">
+        <div class="footer-motto">
+            <span class="motto-zh">記錄 · 反思 · 學習</span><br />
+            <span class="motto-en">Record · Reflection · Learning</span>
+        </div>
+    </section>
+</footer>
+
+<style>
+/* 引入哥特體字體 (UnifrakturMaguntia) */
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap');
+
+.site-footer .powerby {
+    line-height: 1.8;
+}
+
+.footer-motto .motto-zh {
+    font-size: 0.9em;
+    font-family: inherit;
+    font-weight: normal;
+    display: block;
+}
+
+.footer-motto .motto-en {
+    font-size: 1.2em; /* 哥特體通常偏小，適當放大 */
+    font-family: 'UnifrakturMaguntia', serif;
+    font-style: italic; /* 用戶要求的斜體 */
+    display: block;
+    margin-top: 4px;
+}
+</style>
